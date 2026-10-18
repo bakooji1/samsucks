@@ -56,7 +56,7 @@ if [ "$BUNDLE" = 1 ]; then
   # Older TVs: one classic script, compiled down to Tizen 6.0's Chromium 76.
   # Release builds drop js/dev/, so leave its (never-taken) dynamic import alone.
   command -v npx >/dev/null || { echo "Bundling for this TV needs Node.js (npx). Install it and run this again." >&2; exit 1; }
-  npx --yes esbuild@0.24 "$OUT/js/main.js" --bundle --format=iife --target=chrome76 \
+  npx --yes esbuild@0.24.2 "$OUT/js/main.js" --bundle --format=iife --target=chrome76 \
     --log-level=warning --outfile="$OUT/bundle.js" $([ "$DEV" = 1 ] || echo "--external:./dev/*")
   rm -rf "$OUT/js"
   sed -i.bak 's|<script type="module" src="js/main.js"></script>|<script src="bundle.js"></script>|' "$OUT/index.html" && rm "$OUT/index.html.bak"
